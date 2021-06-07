@@ -14,7 +14,6 @@ const carregarPersonatges = () => {
   botoCarregarPersonatges.addEventListener("click", async () => {
     const personatges = await getPersonajes();
     pintarLlistaPersonatges(personatges);
-    return personatges;
   });
 };
 
@@ -24,7 +23,6 @@ const matarPersonatges = () => {
     try {
       const personatgesMorts = await mataPersonajes(familia.value);
       pintarLlistaPersonatges(personatgesMorts);
-      return personatgesMorts;
     } catch (error) {
       missatge.textContent = error.message;
     }
@@ -42,7 +40,7 @@ const pintarLlistaPersonatges = (personatges) => {
     const nomFamilia = personatgeNou.querySelector(".nomFamilia");
     nomFamilia.textContent = personatge.familia;
     const estat = personatgeNou.querySelector(".estado");
-    estat.textContent = personatge.vivo;
+    estat.textContent = personatge.vivo ? "vivo" : "muerto";
     llistaPersonatges.append(personatgeNou);
   }
 };
@@ -55,7 +53,5 @@ const buidarLlistaPersonatges = () => {
 };
 
 // Main
-(() => {
-  carregarPersonatges();
-  matarPersonatges();
-})();
+carregarPersonatges();
+matarPersonatges();
